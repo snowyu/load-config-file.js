@@ -25,9 +25,9 @@
     } else {
       return str;
     }
-  };
+  }
 
-  module.exports = Config = function Config(aPath, aOptions, done) {
+  var Config = module.exports = function Config(aPath, aOptions, done) {
     var result;
     if (isFunction(aOptions)) {
       done = aOptions;
@@ -53,8 +53,8 @@
       vConfigPath = path.replaceExt(aPath, ext);
       if (!content) {
         proc = gConfigurators[ext];
-        content = readFile(vConfigPath, aOptions).then(function(content) {
-          return proc(stripBom(content), aOptions);
+        content = readFile(vConfigPath, aOptions).then(function(data) {
+          return proc(stripBom(data), aOptions);
         }).caught(function() {});
       }// else {
       //  return content;
@@ -90,7 +90,7 @@
     if (isFunction(aProcess)) {
       if (isArray(aExts)) {
         aExts.forEach(function(ext) {
-          return gConfigurators[ext] = aProcess;
+          gConfigurators[ext] = aProcess;
         });
         result = gConfigurators;
       } else if (isString(aExts)) {
