@@ -1,7 +1,7 @@
 {
   "name": "load-config-file",
   "description": "Load the config file as a plain object. The config file format can be registered.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/snowyu/load-config-file.js",
   "repository": {
     "type": "git",
