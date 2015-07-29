@@ -21,4 +21,5 @@ notifications:
     - snowyu.lee@gmail.com
 addons:
   code_climate:
-    repo_token: 0
+    repo_token:
+      secure: "GZrtDoN8Djgp6RshVohiab2PXlkRT+YMXqfNrmMYsy7iFduMnRQr4y9d8Zxs5+B5UODy1FqkzhidViWF9DFgKWuo7zJyqEXDaQdNfFpJdBpaGfiuQEuacM4fQsfmT1NQDf7Nm84o7OxL4mGYIfWT0PorkFNtjAtVmObIcXK0YxhgcwQOjAs29qgs/xIoWvoOR9pU7YZVl3P+kV2gFoZsKxPheAggaY/QkMinao4knokJ+q9cxl1Mqni+YylhdO9ZcxTQ8vE0u6MLNoSAMdlE6vZsSkgGwxMmwMcYSTKm5UNQMb+Q8FFmtb8/5crYjSI8djsa0FkVMz9Qv7snV+jc1XV3kkG9Vp0IV7cgpOzNyVCBBVb7ELLxC++0nY7NvqAbM/UTJgEmklkpEeD9bMobAb6lmO40s44AOMOT2W/7WlydjchTPF7y/74uS4Hjcw3IMf6AnXbJVbR4ydD+nFf4cmQNNz/9Xc0rxSzRtSJRVd4wLJ3CQBJooVk4ehi2eAvSLT/+Zs6BkY8FlukAeDZP/4pLmekcHCuKkhbLrTRrzfKozxDDFziZkpmKTtlZr0OrS3Txe0vuBEoN2tt6YR+xJJzAY4F107pCH0LwWqpvAtT4kLRTsc/Pulr0vrn6f3z73HheWLNrXMa+XtRdsEZZKsuJUWfP34UfIBTVII0CLQQ="
