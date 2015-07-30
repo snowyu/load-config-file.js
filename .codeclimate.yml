@@ -18,6 +18,8 @@ engines:
   coffeelint:
     enabled: true
     config: coffeelint.json
+  eslint:
+    enabled: true
 
 # Engines can analyze files and report issues on them, but you can separately
 # decide which files will receive ratings based on those issues. This is
