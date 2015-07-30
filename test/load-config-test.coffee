@@ -18,7 +18,7 @@ describe 'loadConfig', ->
     delete cfgs['.json']
 
   it 'should register a config format with multi extnames', ->
-    cfgs = loadConfig.register ['.jsn', '.jon', '.json'], JSON.parse
+    cfgs = loadConfig.register ['.jsn', 'jon', '.json'], JSON.parse
     should.exist cfgs
     cfgs.should.be.deep.equal
       '.jsn': JSON.parse

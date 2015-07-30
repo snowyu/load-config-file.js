@@ -90,6 +90,9 @@
     if (isFunction(aProcess)) {
       if (isArray(aExts)) {
         aExts.forEach(function(ext) {
+          if (ext[0] !== '.') {
+            ext = '.' + ext;
+          }
           gConfigurators[ext] = aProcess;
         });
         result = gConfigurators;
