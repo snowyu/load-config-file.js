@@ -25,6 +25,7 @@ loadConfig.register('.json', JSON.parse);
 //the first exist file will be loaded.
 //the default encoding is "utf8" if no encoding.
 //loadConfig('config', {encoding: 'ascii'})
+//the non-enumerable "$cfgPath" property added.
 console.log(loadConfig('config'));
 
 //Asynchronously load config from file
@@ -47,7 +48,21 @@ var config = require('load-config-file');
 * `config.setFileSystem(fs)`: set your favour file system. defaults to 'fs'.
   * the "file system" must implement `readFile(path[, options], done)` and `readFileSync(path[, options])`
 * `load(path, options, done)`: Asynchronously load config from file
+  * return the plain object and the `$cfgPath` property added if suceesful.
 * `loadSync(path, options)`: Synchronously load config from file
+  * return the plain object and the `$cfgPath` property added if suceesful.
+
+## Changes
+
+### v0.2
+
++ add the `$cfgPath`*(String)* non-enumerable property to the result.
++ add object supports:
+
+    ```js
+    var cfgObj = new Config(aPath, aOptions)
+    result = cfgObj.loadSync()
+    ```
 
 ## License
 
