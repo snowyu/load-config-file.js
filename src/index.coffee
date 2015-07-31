@@ -1,121 +1,112 @@
-(function() {
-  var isArray = require('util-ex/lib/is/type/array');
+isArray         = require('util-ex/lib/is/type/array')
+isString        = require('util-ex/lib/is/type/string')
+isObject        = require('util-ex/lib/is/type/object')
+isFunction      = require('util-ex/lib/is/type/function')
+defineProperty  = require('util-ex/lib/defineProperty')
+Promise         = require('bluebird')
+any             = require('promise-sequence/lib/any')
+path            = require('path.js/lib/path').path
 
-  var isString = require('util-ex/lib/is/type/string');
+getKeys     = Object.keys
 
-  var isFunction = require('util-ex/lib/is/type/function');
+stripBom = (str) ->
+  if str.charAt(0) == '\ufeff' then str.slice(1) else str
 
-  //the coffee-coverage bug on Promise.reduce, make the total(content) as number increase.
-  //so use js instead.
-  var Promise = require('bluebird');
+module.exports = class Config
 
-  var path = require('path.js/lib/path').path;
+  configurators: gConfigurators = {}
+  fs: fs = null
+  readFile: readFile = null
 
-  var getKeys = Object.keys;
+  constructor: (aPath, aOptions, done) ->
+    unless @ instanceof Config
+      if isFunction(aOptions)
+        done = aOptions
+        aOptions = null
+      if isFunction(done)
+        result = Config.load(aPath, aOptions, done)
+      else
+        result = Config.loadSync(aPath, aOptions)
+      return result
+    @path = aPath
+    @options = aOptions if typeof aOptions == 'object'
 
-  var fs = null;
+  load: (aPath, aOptions, done)->
+    if isObject(aPath)
+      done  = aOptions
+      aOptions = aPath
+      aPath = null
+    else if isFunction(aPath)
+      done = aPath
+      aPath = null
+      aOptions = null
+    else if isFunction(aOptions)
+      done = aOptions
+      aOptions = null
+    aPath ?= @path
+    aOptions ?= @options
+    Config.load aPath, aOptions, done
+    @
 
-  var readFile = null;
+  loadSync: (aPath, aOptions)->
+    if isObject(aPath)
+      aOptions = aPath
+      aPath = null
+    aPath ?= @path
+    aOptions ?= @options
+    Config.loadSync aPath, aOptions
 
-  var gConfigurators = {};
+  @load: (aPath, aOptions, done) ->
+    aOptions ?= {}
+    aOptions.encoding ?= 'utf8'
 
-  function stripBom(str) {
-    if (str.charAt(0) === '\ufeff') {
-      return str.slice(1);
-    } else {
-      return str;
-    }
-  }
+    vFiles = getKeys(gConfigurators).map (ext)->path.replaceExt(aPath, ext)
+    any vFiles, (file)->
+      readFile(file, aOptions)
+      .then (content)->
+        proc = gConfigurators[path.extname(file)]
+        result = proc stripBom(content), aOptions
+        defineProperty result, '$cfgPath', file if result
+        result
+      .catch ->undefined #TODO: this is a workaround bug on coffee-coverage,
+      #it will inject codes to the empty function and return calls count.
+    .nodeify done
 
-  var Config = module.exports = function Config(aPath, aOptions, done) {
-    var result;
-    if (isFunction(aOptions)) {
-      done = aOptions;
-      aOptions = null;
-    }
-    if (isFunction(done)) {
-      result = Config.load(aPath, aOptions, done);
-    } else {
-      result = Config.loadSync(aPath, aOptions);
-    }
-    return result;
-  }
+  @loadSync: (aPath, aOptions) ->
+    aOptions ?= {}
+    aOptions.encoding ?= 'utf8'
 
-  Config.load = function(aPath, aOptions, done) {
-    if (aOptions == null) {
-      aOptions = {};
-    }
-    if (aOptions.encoding == null) {
-      aOptions.encoding = 'utf8';
-    }
-    return Promise.reduce(getKeys(gConfigurators), function(content, ext) {
-      var proc, vConfigPath;
-      vConfigPath = path.replaceExt(aPath, ext);
-      if (!content) {
-        proc = gConfigurators[ext];
-        content = readFile(vConfigPath, aOptions).then(function(data) {
-          return proc(stripBom(data), aOptions);
-        }).caught(function() {});
-      }// else {
-      //  return content;
-      //}
-      return content;
-    }, null).nodeify(done);
-  };
+    for ext, proc of gConfigurators
+      vConfigPath = path.replaceExt(aPath, ext)
+      try
+        result = stripBom(fs.readFileSync(vConfigPath, aOptions))
+      catch
+        continue
+      result = proc(result, aOptions)
+      if result
+        defineProperty result, '$cfgPath', vConfigPath if result
+        break
+    result
 
-  Config.loadSync = function(aPath, aOptions) {
-    var ext, proc, result, vConfigPath;
-    if (aOptions == null) {
-      aOptions = {};
-    }
-    if (aOptions.encoding == null) {
-      aOptions.encoding = 'utf8';
-    }
-    for (ext in gConfigurators) {
-      proc = gConfigurators[ext];
-      vConfigPath = path.replaceExt(aPath, ext);
-      try {
-        result = stripBom(fs.readFileSync(vConfigPath, aOptions));
-      } catch (_error) {
-        continue;
-      }
-      result = proc(result, aOptions);
-      break;
-    }
-    return result;
-  };
+  @register: (aExts, aProcess) ->
+    if isFunction(aProcess)
+      if isArray(aExts)
+        aExts.forEach (ext) ->
+          ext = '.' + ext if ext[0] != '.'
+          gConfigurators[ext] = aProcess
+          return
+        result = gConfigurators
+      else if isString(aExts)
+        aExts = '.' + aExts if aExts[0] != '.'
+        gConfigurators[aExts] = aProcess
+        result = gConfigurators
+    result
 
-  Config.register = function(aExts, aProcess) {
-    var result;
-    if (isFunction(aProcess)) {
-      if (isArray(aExts)) {
-        aExts.forEach(function(ext) {
-          if (ext[0] !== '.') {
-            ext = '.' + ext;
-          }
-          gConfigurators[ext] = aProcess;
-        });
-        result = gConfigurators;
-      } else if (isString(aExts)) {
-        if (aExts[0] !== '.') {
-          aExts = '.' + aExts;
-        }
-        gConfigurators[aExts] = aProcess;
-        result = gConfigurators;
-      }
-    }
-    return result;
-  };
+  @setFileSystem: (aFileSystem) ->
+    if aFileSystem and aFileSystem.readFile
+      Config::fs = fs = aFileSystem
+      Config::readFile = readFile = Promise.promisify(fs.readFile, fs)
+      true
 
-  Config.setFileSystem = function(aFileSystem) {
-    if (aFileSystem && aFileSystem.readFile) {
-      fs = aFileSystem;
-      readFile = Promise.promisify(fs.readFile, fs);
-      return true;
-    }
-  };
+Config.setFileSystem require('fs')
 
-
-  Config.setFileSystem(require('fs'));
-
-}).call(this);

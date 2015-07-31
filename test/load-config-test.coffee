@@ -28,12 +28,14 @@ describe 'loadConfig', ->
   it 'should load config synchronously', ->
     result = loadConfig(__dirname+'/fixture/config')
     should.exist result
+    result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
     result.should.be.deep.equal
       str: 'hello'
 
   it 'should load config synchronously with Bom', ->
     result = loadConfig(__dirname+'/fixture/con')
     should.exist result
+    result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
     result.should.be.deep.equal
       test: 123
 
@@ -42,6 +44,7 @@ describe 'loadConfig', ->
     loadConfig __dirname+'/fixture/config', (err, result)->
       return done(err) if err
       should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
       result.should.be.deep.equal
         str: 'hello'
       done()
@@ -50,9 +53,72 @@ describe 'loadConfig', ->
     loadConfig __dirname+'/fixture/con', (err, result)->
       return done(err) if err
       should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
       result.should.be.deep.equal
         test: 123
       done()
+
+  describe 'object usage', ->
+    it 'should create a new Config object', ->
+      result = new loadConfig 'path1', {hi:112}
+      result.should.have.property 'path', 'path1'
+      result.should.have.ownProperty 'options'
+      result.options.should.be.deep.equal {hi:112}
+
+    it 'should load config synchronously', ->
+      result = new loadConfig(__dirname+'/fixture/config')
+      result = result.loadSync()
+      should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
+      result.should.be.deep.equal
+        str: 'hello'
+    it 'should load config synchronously overwrite path', ->
+      result = new loadConfig(__dirname+'/fixture/con')
+      result = result.loadSync(__dirname+'/fixture/config')
+      should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
+      result.should.be.deep.equal
+        str: 'hello'
+
+
+    it 'should load config synchronously with Bom', ->
+      result = new loadConfig(__dirname+'/fixture/con')
+      result = result.loadSync(encoding:'utf8')
+      should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
+      result.should.be.deep.equal
+        test: 123
+
+
+    it 'should load config asynchronously', (done)->
+      result = new loadConfig __dirname+'/fixture/config'
+      result.load (err, result)->
+        return done(err) if err
+        should.exist result
+        result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
+        result.should.be.deep.equal
+          str: 'hello'
+        done()
+
+    it 'should load config asynchronously overwrite path', (done)->
+      result = new loadConfig __dirname+'/fixture/con'
+      result.load __dirname+'/fixture/config', (err, result)->
+        return done(err) if err
+        should.exist result
+        result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
+        result.should.be.deep.equal
+          str: 'hello'
+        done()
+
+    it 'should load config asynchronously with bom', (done)->
+      result = new loadConfig __dirname+'/fixture/con'
+      result.load {encoding:'utf8'}, (err, result)->
+        return done(err) if err
+        should.exist result
+        result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
+        result.should.be.deep.equal
+          test: 123
+        done()
 
   describe 'fake filesystem', ->
     fakeFS = require './fake-fs'
@@ -60,6 +126,7 @@ describe 'loadConfig', ->
       fakeFS.result = {}
     it 'should set FileSystem', ->
       loadConfig.setFileSystem(fakeFS).should.be.true
+      loadConfig::fs.should.be.equal fakeFS
 
     it 'should load config synchronously', ->
       result = loadConfig('config', encoding:'ascii')
