@@ -14,7 +14,7 @@ stripBom = (str) ->
 
 module.exports = class Config
 
-  configurators: gConfigurators = {}
+  configurators: {}
   fs: fs = null
   readFile: readFile = null
 
@@ -59,12 +59,16 @@ module.exports = class Config
   @load: (aPath, aOptions, done) ->
     aOptions ?= {}
     aOptions.encoding ?= 'utf8'
+    if isObject aOptions.configurators
+      vConfigurators = aOptions.configurators
+    else
+      vConfigurators = Config::configurators
 
-    vFiles = getKeys(gConfigurators).map (ext)->path.replaceExt(aPath, ext)
+    vFiles = getKeys(vConfigurators).map (ext)->path.replaceExt(aPath, ext)
     any vFiles, (file)->
       readFile(file, aOptions)
       .then (content)->
-        proc = gConfigurators[path.extname(file)]
+        proc = vConfigurators[path.extname(file)]
         result = proc stripBom(content), aOptions
         defineProperty result, '$cfgPath', file if result
         result
@@ -75,8 +79,12 @@ module.exports = class Config
   @loadSync: (aPath, aOptions) ->
     aOptions ?= {}
     aOptions.encoding ?= 'utf8'
+    if isObject aOptions.configurators
+      vConfigurators = aOptions.configurators
+    else
+      vConfigurators = Config::configurators
 
-    for ext, proc of gConfigurators
+    for ext, proc of vConfigurators
       vConfigPath = path.replaceExt(aPath, ext)
       try
         result = stripBom(fs.readFileSync(vConfigPath, aOptions))
@@ -88,18 +96,19 @@ module.exports = class Config
         break
     result
 
-  @register: (aExts, aProcess) ->
+  @register: (aExts, aProcess, aConfigurators) ->
+    aConfigurators ?= Config::configurators
     if isFunction(aProcess)
       if isArray(aExts)
         aExts.forEach (ext) ->
           ext = '.' + ext if ext[0] != '.'
-          gConfigurators[ext] = aProcess
+          aConfigurators[ext] = aProcess
           return
-        result = gConfigurators
+        result = aConfigurators
       else if isString(aExts)
         aExts = '.' + aExts if aExts[0] != '.'
-        gConfigurators[aExts] = aProcess
-        result = gConfigurators
+        aConfigurators[aExts] = aProcess
+        result = aConfigurators
     result
 
   @setFileSystem: (aFileSystem) ->

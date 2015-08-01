@@ -120,6 +120,47 @@ describe 'loadConfig', ->
           test: 123
         done()
 
+  describe 'external configurators', ->
+    configs = {}
+    oldConfigs = null
+    before ->
+      oldConfigs = loadConfig::configurators
+      loadConfig::configurators = null
+    after ->
+      loadConfig::configurators = oldConfigs
+    it 'should register a config format', ->
+      cfgs = loadConfig.register 'json', JSON.parse, configs
+      should.exist cfgs
+      cfgs.should.have.property '.json', JSON.parse, configs
+      cfgs.should.be.equal configs
+      delete cfgs['.json']
+
+    it 'should register a config format with multi extnames', ->
+      cfgs = loadConfig.register ['.jsn', 'jon', '.json'], JSON.parse, configs
+      should.exist cfgs
+      cfgs.should.be.equal configs
+      cfgs.should.be.deep.equal
+        '.jsn': JSON.parse
+        '.jon': JSON.parse
+        '.json': JSON.parse
+
+    it 'should load config synchronously', ->
+      result = loadConfig(__dirname+'/fixture/config', configurators:configs)
+      should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
+      result.should.be.deep.equal
+        str: 'hello'
+
+    it 'should load config asynchronously', (done)->
+      loadConfig __dirname+'/fixture/config', configurators:configs, (err, result)->
+        return done(err) if err
+        should.exist result
+        result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
+        result.should.be.deep.equal
+          str: 'hello'
+        done()
+
+
   describe 'fake filesystem', ->
     fakeFS = require './fake-fs'
     afterEach ->
