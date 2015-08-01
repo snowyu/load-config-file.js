@@ -100,6 +100,14 @@ describe 'loadConfig', ->
           str: 'hello'
         done()
 
+    it 'should load config asynchronously with raiseError if nothing loaded.', (done)->
+      result = new loadConfig __dirname+'/fixture/xxx', raiseError: true
+      result.load (err, result)->
+        should.exist err
+        err.should.have.property 'message', 'Nothing Loaded'
+        should.not.exist result
+        done()
+
     it 'should load config asynchronously overwrite path', (done)->
       result = new loadConfig __dirname+'/fixture/con'
       result.load __dirname+'/fixture/config', (err, result)->

@@ -63,6 +63,7 @@ module.exports = class Config
       vConfigurators = aOptions.configurators
     else
       vConfigurators = Config::configurators
+    raiseError = aOptions.raiseError
 
     vFiles = getKeys(vConfigurators).map (ext)->path.replaceExt(aPath, ext)
     any vFiles, (file)->
@@ -74,6 +75,10 @@ module.exports = class Config
         result
       .catch ->undefined #TODO: this is a workaround bug on coffee-coverage,
       #it will inject codes to the empty function and return calls count.
+    .then (content)->
+      if raiseError and content is undefined
+        throw new TypeError('Nothing Loaded')
+      content
     .nodeify done
 
   @loadSync: (aPath, aOptions) ->
