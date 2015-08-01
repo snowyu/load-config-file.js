@@ -29,7 +29,7 @@ module.exports = class Config
         result = Config.loadSync(aPath, aOptions)
       return result
     @path = aPath
-    @options = aOptions if typeof aOptions == 'object'
+    @options = aOptions if isObject aOptions
 
   load: (aPath, aOptions, done)->
     if isObject(aPath)
