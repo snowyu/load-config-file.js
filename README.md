@@ -48,6 +48,8 @@ var config = require('load-config-file');
 * `config.setFileSystem(fs)`: set your favour file system. defaults to 'fs'.
   * the "file system" must implement `readFile(path[, options], done)` and `readFileSync(path[, options])`
 * `load(path, options, done)`: Asynchronously load config from file
+  * options
+    * raiseError*(Boolean)*: raise error if nothing loaded defaults to false.
   * return the plain object and the `$cfgPath` property added if successful.
 * `loadSync(path, options)`: Synchronously load config from file
   * return the plain object and the `$cfgPath` property added if successful.
