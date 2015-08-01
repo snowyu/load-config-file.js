@@ -58,6 +58,7 @@ var config = require('load-config-file');
 
 ### v0.2
 
++ raiseError option to load function asynchronously.
 + add the `$cfgPath`*(String)* non-enumerable property to the result.
 + add object supports:
 
