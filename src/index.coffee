@@ -64,8 +64,15 @@ module.exports = class Config
     else
       vConfigurators = Config::configurators
     raiseError = aOptions.raiseError
+    excludes = aOptions.exclude
+    if isString excludes
+      excludes = [excludes]
+    else if !isArray excludes
+      excludes = null
 
     vFiles = getKeys(vConfigurators).map (ext)->path.replaceExt(aPath, ext)
+    if excludes
+      vFiles = vFiles.filter (file)->result = !(file in excludes)
     any vFiles, (file)->
       readFile(file, aOptions)
       .then (content)->
@@ -88,9 +95,15 @@ module.exports = class Config
       vConfigurators = aOptions.configurators
     else
       vConfigurators = Config::configurators
+    excludes = aOptions.exclude
+    if isString excludes
+      excludes = [excludes]
+    else if !isArray excludes
+      excludes = null
 
     for ext, proc of vConfigurators
       vConfigPath = path.replaceExt(aPath, ext)
+      continue if excludes and (vConfigPath in excludes)
       try
         result = stripBom(fs.readFileSync(vConfigPath, aOptions))
       catch

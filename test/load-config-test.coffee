@@ -32,6 +32,11 @@ describe 'loadConfig', ->
     result.should.be.deep.equal
       str: 'hello'
 
+  it 'should exclude itself synchronously', ->
+    file = __dirname+'/fixture/config.json'
+    result = loadConfig(file, exclude:file)
+    should.not.exist result
+
   it 'should load config synchronously with Bom', ->
     result = loadConfig(__dirname+'/fixture/con')
     should.exist result
@@ -39,6 +44,11 @@ describe 'loadConfig', ->
     result.should.be.deep.equal
       test: 123
 
+  it 'should exclude itself asynchronously', (done)->
+    file = __dirname+'/fixture/config.json'
+    loadConfig file, exclude:file, (err, result)->
+      should.not.exist result
+      done(err, result)
 
   it 'should load config asynchronously', (done)->
     loadConfig __dirname+'/fixture/config', (err, result)->
