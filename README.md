@@ -46,7 +46,7 @@ var config = require('load-config-file');
 ```
 
 * `config.register(extensionNames, parserFunc)`: register the configuration file format to
-  load.
+  load. return the configurators if successful.
   * `extensionNames` *(Sting|ArrayOf String)*: the configuration file extension name(s)   
     with dot.
   * `parserFunc` *Function(context)*: the configuration context parser function:
