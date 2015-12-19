@@ -57,6 +57,7 @@ var config = require('load-config-file');
   * options
     * `raiseError` *(Boolean)*: raise error if nothing loaded defaults to false.
     * `exclude` *(String|ArrayOf String)*: excludes some files.
+    * `encoding` *(String)*: the file encoding name. defaults to 'utf8'.
   * return the plain object and the `$cfgPath` property added if successful.
 * `loadSync(path, options)`: Synchronously load config from file
   * return the plain object and the `$cfgPath` property added if successful.
