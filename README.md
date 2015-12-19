@@ -16,12 +16,12 @@ var loadConfig = require('load-config-file');
 var yaml  = require('js-yaml');
 var cson  = require('cson');
 
-loadConfig.register(['.yaml', '.yml'], yaml.safeLoad);
-loadConfig.register('.cson', cson.parseCSONString.bind(cson));
-loadConfig.register('.json', JSON.parse);
+loadConfig.register(['.yaml', '.yml'], yaml.safeLoad); //first search.
+loadConfig.register('.cson', cson.parseCSONString.bind(cson)); //second search
+loadConfig.register('.json', JSON.parse); //third search.
 
 //Synchronously load config from file.
-//it will search config.yaml, config.yml, config.cson, config.json
+//it will search config.yaml, config.yml, config.cson, config.json in the current folder.
 //the first exist file will be loaded.
 //the default encoding is "utf8" if no encoding.
 //loadConfig('config', {encoding: 'ascii'})
@@ -45,12 +45,18 @@ loadConfig('config', function(err, result){
 var config = require('load-config-file');
 ```
 
+* `config.register(extensionNames, parserFunc)`: register the configuration file format to
+  load.
+  * `extensionNames` *(Sting|ArrayOf String)*: the configuration file extension name(s)   
+    with dot.
+  * `parserFunc` *Function(context)*: the configuration context parser function:
+    * parse the configuration context and return the plain object.
 * `config.setFileSystem(fs)`: set your favour file system. defaults to 'fs'.
   * the "file system" must implement `readFile(path[, options], done)` and `readFileSync(path[, options])`
 * `load(path, options, done)`: Asynchronously load config from file
   * options
-    * raiseError*(Boolean)*: raise error if nothing loaded defaults to false.
-    * exclude*(String|ArrayOf String)*: excludes some files.
+    * `raiseError` *(Boolean)*: raise error if nothing loaded defaults to false.
+    * `exclude` *(String|ArrayOf String)*: excludes some files.
   * return the plain object and the `$cfgPath` property added if successful.
 * `loadSync(path, options)`: Synchronously load config from file
   * return the plain object and the `$cfgPath` property added if successful.
@@ -61,14 +67,13 @@ var config = require('load-config-file');
 
 + raiseError option to load function asynchronously.
 + add the `$cfgPath`*(String)* non-enumerable property to the result.
-+ add object supports:
++ add object usage supports:
 
     ```js
-    var cfgObj = new Config(aPath, aOptions)
+    var cfgObj = new Config(aPath, aOptions) //create a configuration object.
     result = cfgObj.loadSync()
     ```
 
 ## License
 
 MIT
-
