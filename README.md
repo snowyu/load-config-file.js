@@ -80,6 +80,12 @@ var config = require('load-config-file');
     result = cfgObj.loadSync()
     ```
 
+## TODO
+
+* ! how to use the specified promise library via [any-promise](https://github.com/kevinbeaty/any-promise)?
+  * currently use the bluebird by default.
+
+
 ## License
 
 MIT

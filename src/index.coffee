@@ -1,10 +1,13 @@
+require('any-promise/register')('bluebird')
+
 isArray         = require('util-ex/lib/is/type/array')
 isString        = require('util-ex/lib/is/type/string')
 isObject        = require('util-ex/lib/is/type/object')
 isFunction      = require('util-ex/lib/is/type/function')
 defineProperty  = require('util-ex/lib/defineProperty')
-Promise         = require('bluebird')
+Promise         = require('any-promise')
 any             = require('promise-sequence/lib/any')
+
 
 getKeys     = Object.keys
 
