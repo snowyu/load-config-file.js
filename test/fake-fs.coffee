@@ -1,6 +1,6 @@
 isFunction      = require 'util-ex/lib/is/type/function'
 
-module.exports  =
+module.exports  = fs =
   files: {}
   result:{}
   path: require('path.js/lib/path').path

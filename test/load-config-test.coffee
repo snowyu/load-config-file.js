@@ -181,25 +181,31 @@ describe 'loadConfig', ->
 
   describe 'fake filesystem', ->
     fakeFS = require './fake-fs'
+    cfgs = {}
+    before ->
+      loadConfig.setFileSystem(fakeFS).should.be.true
+      cfgs = loadConfig.register ['.jsn', 'jon', '.json'], JSON.parse, cfgs
     afterEach ->
       fakeFS.result = {}
+      return
+    after ->
     it 'should set FileSystem', ->
-      loadConfig.setFileSystem(fakeFS).should.be.true
       loadConfig::fs.should.be.equal fakeFS
 
     it 'should load config synchronously', ->
-      result = loadConfig('config', encoding:'ascii')
+      result = loadConfig('config', encoding:'ascii', configurators:cfgs)
       should.not.exist result
       expectedResult = {}
       for k of cfgs
-        expectedResult['config'+k] = encoding: 'ascii'
+        expectedResult['config'+k] = configurators:cfgs, encoding: 'ascii'
       fakeFS.result.should.be.deep.equal expectedResult
 
-    it 'should load config asynchronously', ()->
-      loadConfig 'config', encoding:'ascii', (err, result)->
+    it 'should load config asynchronously', (done)->
+      loadConfig 'config', encoding:'ascii', configurators:cfgs, (err, result)->
         should.not.exist result
         expectedResult = {}
         for k of cfgs
-          expectedResult['config'+k] = encoding: 'ascii'
-        fakeFS.result.should.be.deep.equal expectedResult
+          expectedResult['config'+k] = configurators:cfgs, encoding: 'ascii'
+        expect(fakeFS.result, 'fakeFS result').to.be.deep.equal expectedResult
+        done()
 
