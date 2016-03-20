@@ -3,6 +3,7 @@ isFunction      = require 'util-ex/lib/is/type/function'
 module.exports  =
   files: {}
   result:{}
+  path: require('path.js/lib/path').path
   readFileSync: (aPath, aOptions)->
     @result[aPath] = aOptions
     throw aOptions.error if aOptions.error
