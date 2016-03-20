@@ -5,7 +5,6 @@ isFunction      = require('util-ex/lib/is/type/function')
 defineProperty  = require('util-ex/lib/defineProperty')
 Promise         = require('bluebird')
 any             = require('promise-sequence/lib/any')
-path            = require('path.js/lib/path').path
 
 getKeys     = Object.keys
 
@@ -16,6 +15,7 @@ module.exports = class Config
 
   configurators: {}
   fs: fs = null
+  path: path = require('path.js')#require('path.js/lib/path').path
   readFile: readFile = null
 
   constructor: (aPath, aOptions, done) ->
@@ -132,6 +132,7 @@ module.exports = class Config
   @setFileSystem: (aFileSystem) ->
     if aFileSystem and aFileSystem.readFile
       Config::fs = fs = aFileSystem
+      Config::path = path = aFileSystem.path if aFileSystem.path
       Config::readFile = readFile = Promise.promisify(fs.readFile, fs)
       true
 

@@ -6,8 +6,13 @@
 [![downloads](https://img.shields.io/npm/dm/load-config-file.svg)](https://npmjs.org/package/load-config-file)
 [![license](https://img.shields.io/npm/l/load-config-file.svg)](https://npmjs.org/package/load-config-file)
 
-Load the config file as a plain object. The config file format can be registered.
-The registered file format order is the search order.
+Load the config file as a plain object.
+
+* The config file format can be registered.
+* The registered file format order is the search order.
+* the virtual file system can be specfied: `loadConfig.setFileSystem(fs)`
+  * `fs.path = require('path.js/lib/path').path` for the  virtual POSIX path.
+    * you must set the path first before call setFileSystem.
 
 ## Usage
 
@@ -47,7 +52,7 @@ var config = require('load-config-file');
 
 * `config.register(extensionNames, parserFunc)`: register the configuration file format to
   load. return the configurators if successful.
-  * `extensionNames` *(Sting|ArrayOf String)*: the configuration file extension name(s)   
+  * `extensionNames` *(Sting|ArrayOf String)*: the configuration file extension name(s)
     with dot.
   * `parserFunc` *Function(context)*: the configuration context parser function:
     * parse the configuration context and return the plain object.
