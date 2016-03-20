@@ -133,7 +133,7 @@ module.exports = class Config
     if aFileSystem and aFileSystem.readFile
       Config::fs = fs = aFileSystem
       Config::path = path = aFileSystem.path if aFileSystem.path
-      Config::readFile = readFile = Promise.promisify(fs.readFile, fs)
+      Config::readFile = readFile = Promise.promisify(fs.readFile, context:fs)
       true
 
 Config.setFileSystem require('fs')
