@@ -122,11 +122,11 @@ module.exports = class Config
         err.name = path.basename(vConfigPath) + ':' + err.name
         throw err
 
-      if raiseError and result is undefined
-        throw new TypeError(path.basename(aPath) + ' Nothing Loaded')
       if result
         defineProperty result, '$cfgPath', vConfigPath
         break
+    if raiseError and result is undefined
+      throw new TypeError(path.basename(aPath) + ' Nothing Loaded')
     result
 
   @register: (aExts, aProcess, aConfigurators) ->

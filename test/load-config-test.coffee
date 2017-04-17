@@ -31,7 +31,7 @@ describe 'loadConfig', ->
   describe 'synchronously', ->
 
     it 'should load config synchronously', ->
-      result = loadConfig(__dirname+'/fixture/config')
+      result = loadConfig(__dirname+'/fixture/config', raiseError:true)
       should.exist result
       result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
       result.should.be.deep.equal
@@ -39,6 +39,9 @@ describe 'loadConfig', ->
 
     it 'should load wrong config file synchronously failed', ->
       loadConfig.bind(null, __dirname+'/fixture/err').should.throw('Unexpected token')
+
+    it 'should raise error if raiseError is true and no config loaded', ->
+      loadConfig.bind(null, __dirname+'/fixture/xxy', raiseError: true).should.throw('xxy Nothing Loaded')
 
     it 'should exclude itself synchronously', ->
       file = __dirname+'/fixture/config.json'
@@ -61,12 +64,19 @@ describe 'loadConfig', ->
       return
 
     it 'should load config asynchronously', (done)->
-      loadConfig __dirname+'/fixture/config', (err, result)->
+      loadConfig __dirname+'/fixture/config', raiseError:true, (err, result)->
         return done(err) if err
         should.exist result
         result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
         result.should.be.deep.equal
           str: 'hello'
+        done()
+      return
+
+    it 'should raise error if raiseError is true and no config loaded', (done)->
+      loadConfig __dirname+'/fixture/xxy', raiseError: true, (err, result)->
+        should.exist err
+        err.should.have.property 'message', 'xxy Nothing Loaded'
         done()
       return
 
