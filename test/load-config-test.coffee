@@ -11,6 +11,9 @@ loadConfig      = require '../src/'
 cfgs            = null
 
 describe 'loadConfig', ->
+  before 'register', ->
+    loadConfig.register ['.jsn', 'jon', '.json'], JSON.parse
+
   it 'should register a config format', ->
     cfgs = loadConfig.register 'json', JSON.parse
     should.exist cfgs
@@ -25,48 +28,64 @@ describe 'loadConfig', ->
       '.jon': JSON.parse
       '.json': JSON.parse
 
-  it 'should load config synchronously', ->
-    result = loadConfig(__dirname+'/fixture/config')
-    should.exist result
-    result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
-    result.should.be.deep.equal
-      str: 'hello'
+  describe 'synchronously', ->
 
-  it 'should exclude itself synchronously', ->
-    file = __dirname+'/fixture/config.json'
-    result = loadConfig(file, exclude:file)
-    should.not.exist result
-
-  it 'should load config synchronously with Bom', ->
-    result = loadConfig(__dirname+'/fixture/con')
-    should.exist result
-    result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
-    result.should.be.deep.equal
-      test: 123
-
-  it 'should exclude itself asynchronously', (done)->
-    file = __dirname+'/fixture/config.json'
-    loadConfig file, exclude:file, (err, result)->
-      should.not.exist result
-      done(err, result)
-
-  it 'should load config asynchronously', (done)->
-    loadConfig __dirname+'/fixture/config', (err, result)->
-      return done(err) if err
+    it 'should load config synchronously', ->
+      result = loadConfig(__dirname+'/fixture/config')
       should.exist result
       result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
       result.should.be.deep.equal
         str: 'hello'
-      done()
 
-  it 'should load config asynchronously with bom', (done)->
-    loadConfig __dirname+'/fixture/con', (err, result)->
-      return done(err) if err
+    it 'should load wrong config file synchronously failed', ->
+      loadConfig.bind(null, __dirname+'/fixture/err').should.throw('Unexpected token')
+
+    it 'should exclude itself synchronously', ->
+      file = __dirname+'/fixture/config.json'
+      result = loadConfig(file, exclude:file)
+      should.not.exist result
+
+    it 'should load config synchronously with Bom', ->
+      result = loadConfig(__dirname+'/fixture/con')
       should.exist result
       result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
       result.should.be.deep.equal
         test: 123
-      done()
+
+  describe 'asynchronously', ->
+    it 'should exclude itself asynchronously', (done)->
+      file = __dirname+'/fixture/config.json'
+      loadConfig file, exclude:file, (err, result)->
+        should.not.exist result
+        done(err, result)
+      return
+
+    it 'should load config asynchronously', (done)->
+      loadConfig __dirname+'/fixture/config', (err, result)->
+        return done(err) if err
+        should.exist result
+        result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
+        result.should.be.deep.equal
+          str: 'hello'
+        done()
+      return
+
+    it 'should load wrong config file asynchronously failed', (done)->
+      loadConfig __dirname+'/fixture/err', (err, result)->
+        should.exist err
+        err.should.have.property 'name', 'err.json:SyntaxError'
+        done()
+      return
+
+    it 'should load config asynchronously with bom', (done)->
+      loadConfig __dirname+'/fixture/con', (err, result)->
+        return done(err) if err
+        should.exist result
+        result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
+        result.should.be.deep.equal
+          test: 123
+        done()
+      return
 
   describe 'object usage', ->
     it 'should create a new Config object', ->
@@ -109,14 +128,16 @@ describe 'loadConfig', ->
         result.should.be.deep.equal
           str: 'hello'
         done()
+      return
 
     it 'should load config asynchronously with raiseError if nothing loaded.', (done)->
       result = new loadConfig __dirname+'/fixture/xxx', raiseError: true
       result.load (err, result)->
         should.exist err
-        err.should.have.property 'message', 'Nothing Loaded'
+        err.should.have.property 'message', 'xxx Nothing Loaded'
         should.not.exist result
         done()
+      return
 
     it 'should load config asynchronously overwrite path', (done)->
       result = new loadConfig __dirname+'/fixture/con'
@@ -127,6 +148,7 @@ describe 'loadConfig', ->
         result.should.be.deep.equal
           str: 'hello'
         done()
+      return
 
     it 'should load config asynchronously with bom', (done)->
       result = new loadConfig __dirname+'/fixture/con'
@@ -137,6 +159,7 @@ describe 'loadConfig', ->
         result.should.be.deep.equal
           test: 123
         done()
+      return
 
   describe 'external configurators', ->
     configs = {}
@@ -177,6 +200,7 @@ describe 'loadConfig', ->
         result.should.be.deep.equal
           str: 'hello'
         done()
+      return
 
 
   describe 'fake filesystem', ->
@@ -188,7 +212,6 @@ describe 'loadConfig', ->
     afterEach ->
       fakeFS.result = {}
       return
-    after ->
     it 'should set FileSystem', ->
       loadConfig::fs.should.be.equal fakeFS
 
@@ -208,4 +231,5 @@ describe 'loadConfig', ->
           expectedResult['config'+k] = configurators:cfgs, encoding: 'ascii'
         expect(fakeFS.result, 'fakeFS result').to.be.deep.equal expectedResult
         done()
+      return
 

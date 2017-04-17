@@ -1,5 +1,4 @@
-require('any-promise/register')('bluebird')
-
+require('any-promise/register/bluebird')
 isArray         = require('util-ex/lib/is/type/array')
 isString        = require('util-ex/lib/is/type/string')
 isObject        = require('util-ex/lib/is/type/object')
@@ -79,21 +78,27 @@ module.exports = class Config
     any vFiles, (file)->
       readFile(file, aOptions)
       .then (content)->
-        proc = vConfigurators[path.extname(file)]
-        result = proc stripBom(content), aOptions
-        defineProperty result, '$cfgPath', file if result
-        result
-      .catch ->undefined #TODO: this is a workaround bug on coffee-coverage,
-      #it will inject codes to the empty function and return calls count.
+        if content
+          proc = vConfigurators[path.extname(file)]
+          content = proc stripBom(content), aOptions
+          defineProperty content, '$cfgPath', file if content
+        content
+      .catch (err)->
+        if err.code != 'ENOENT'
+          err.name = path.basename(file) + ':' + err.name
+          throw err
+        return
+
     .then (content)->
       if raiseError and content is undefined
-        throw new TypeError('Nothing Loaded')
+        throw new TypeError(path.basename(aPath) + ' Nothing Loaded')
       content
-    .nodeify done
+    .asCallback done
 
   @loadSync: (aPath, aOptions) ->
     aOptions ?= {}
     aOptions.encoding ?= 'utf8'
+    raiseError = aOptions.raiseError
     if isObject aOptions.configurators
       vConfigurators = aOptions.configurators
     else
@@ -109,11 +114,18 @@ module.exports = class Config
       continue if excludes and (vConfigPath in excludes)
       try
         result = stripBom(fs.readFileSync(vConfigPath, aOptions))
-      catch
+      catch err
         continue
-      result = proc(result, aOptions)
+      try
+        result = proc(result, aOptions)
+      catch err
+        err.name = path.basename(vConfigPath) + ':' + err.name
+        throw err
+
+      if raiseError and result is undefined
+        throw new TypeError(path.basename(aPath) + ' Nothing Loaded')
       if result
-        defineProperty result, '$cfgPath', vConfigPath if result
+        defineProperty result, '$cfgPath', vConfigPath
         break
     result
 
