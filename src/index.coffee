@@ -20,6 +20,15 @@ module.exports = class Config
   path: path = require('path.js')#require('path.js/lib/path').path
   readFile: readFile = null
 
+  replaceExt = (aPath, aExt, aRegisteredExts)->
+    aRegisteredExts = getKeys Config::configurators unless aRegisteredExts
+    result = path.extname aPath
+    if result in aRegisteredExts
+      result = path.replaceExt aPath, aExt
+    else
+      result = aPath + aExt
+    result
+
   constructor: (aPath, aOptions, done) ->
     unless @ instanceof Config
       if isFunction(aOptions)
@@ -72,7 +81,8 @@ module.exports = class Config
     else if !isArray excludes
       excludes = null
 
-    vFiles = getKeys(vConfigurators).map (ext)->path.replaceExt(aPath, ext)
+    vRegedExts = getKeys(vConfigurators)
+    vFiles = vRegedExts.map (ext)->replaceExt(aPath, ext, vRegedExts)
     if excludes
       vFiles = vFiles.filter (file)->result = !(file in excludes)
     any vFiles, (file)->
@@ -109,8 +119,9 @@ module.exports = class Config
     else if !isArray excludes
       excludes = null
 
+    vRegedExts = getKeys(vConfigurators)
     for ext, proc of vConfigurators
-      vConfigPath = path.replaceExt(aPath, ext)
+      vConfigPath = replaceExt(aPath, ext, vRegedExts)
       continue if excludes and (vConfigPath in excludes)
       try
         result = stripBom(fs.readFileSync(vConfigPath, aOptions))

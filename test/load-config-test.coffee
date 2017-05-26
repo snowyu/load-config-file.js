@@ -37,6 +37,13 @@ describe 'loadConfig', ->
       result.should.be.deep.equal
         str: 'hello'
 
+    it 'should load config.part synchronously', ->
+      result = loadConfig(__dirname+'/fixture/config.part', raiseError:true)
+      should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/config.part.json'
+      result.should.be.deep.equal
+        part: 'hello'
+
     it 'should load wrong config file synchronously failed', ->
       loadConfig.bind(null, __dirname+'/fixture/err').should.throw('Unexpected token')
 
@@ -111,6 +118,15 @@ describe 'loadConfig', ->
       result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
       result.should.be.deep.equal
         str: 'hello'
+
+    it 'should load config.part synchronously', ->
+      result = new loadConfig(__dirname+'/fixture/config.part')
+      result = result.loadSync()
+      should.exist result
+      result.should.have.property '$cfgPath', __dirname+'/fixture/config.part.json'
+      result.should.be.deep.equal
+        part: 'hello'
+
     it 'should load config synchronously overwrite path', ->
       result = new loadConfig(__dirname+'/fixture/con')
       result = result.loadSync(__dirname+'/fixture/config')
@@ -137,6 +153,17 @@ describe 'loadConfig', ->
         result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
         result.should.be.deep.equal
           str: 'hello'
+        done()
+      return
+
+    it 'should load config.part asynchronously', (done)->
+      result = new loadConfig __dirname+'/fixture/config.part'
+      result.load (err, result)->
+        return done(err) if err
+        should.exist result
+        result.should.have.property '$cfgPath', __dirname+'/fixture/config.part.json'
+        result.should.be.deep.equal
+          part: 'hello'
         done()
       return
 
