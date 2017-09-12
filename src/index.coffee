@@ -90,7 +90,7 @@ module.exports = class Config
       .then (content)->
         if content
           proc = vConfigurators[path.extname(file)]
-          content = proc stripBom(content), aOptions
+          content = proc stripBom(content), aOptions, file
           defineProperty content, '$cfgPath', file if content
         content
       .catch (err)->
@@ -128,7 +128,7 @@ module.exports = class Config
       catch err
         continue
       try
-        result = proc(result, aOptions)
+        result = proc(result, aOptions, vConfigPath)
       catch err
         err.name = path.basename(vConfigPath) + ':' + err.name
         throw err
