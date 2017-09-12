@@ -38,7 +38,7 @@
     "util-ex": "^0.3.10"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.2",
     "coffee-coverage": "^2.0.1",
     "grunt": "*",
     "grunt-contrib-clean": "*",
@@ -49,12 +49,12 @@
     "grunt-newer": "*",
     "grunt-release": "*",
     "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
+    "mocha": "^3.5.3",
     "pre-commit": "^1.0.2",
-    "rimraf": "^2.2.8",
-    "shasum": "^1.0.0",
-    "sinon": "^2.1.0",
-    "sinon-chai": "^2.9.0"
+    "rimraf": "^2.6.2",
+    "shasum": "^1.0.2",
+    "sinon": "^3.2.1",
+    "sinon-chai": "^2.13.0"
   },
   "scripts": {
     "test": "grunt test",
