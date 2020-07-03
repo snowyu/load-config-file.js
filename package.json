@@ -12,6 +12,7 @@
     "README.md",
     "LICENSE-MIT",
     "*.js",
+    "*.ts",
     "*.coffee",
     "test",
     "src",
