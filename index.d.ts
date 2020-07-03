@@ -23,9 +23,10 @@ export interface IFileSystem {
 
 export default class Config {
   static register(aExts: string|string[], aProcess: ConfigAsyncProcessFn, aConfigurators?: IConfigurator)
-  static setFileSystem(aFileSystem: any)
-  static load(aPath: string, aOptions: IConfigOptions, done?: ConfigCallBackFn): Promise<string>
-  static loadSync(aPath: string, aOptions: IConfigOptions): string
+  static setFileSystem(aFileSystem: IFileSystem)
+
+  static load(aPath: string, aOptions: IConfigOptions, done?: ConfigCallBackFn): Promise<any>
+  static loadSync(aPath: string, aOptions: IConfigOptions): any
 
   configurators: IConfigurator
   fs: IFileSystem
@@ -33,6 +34,6 @@ export default class Config {
   readFile: any
 
   constructor(aPath: string, aOptions: IConfigOptions);
-  load(aPath: string, aOptions: IConfigOptions, done?: ConfigCallBackFn): Promise<string>
-  loadSync(aPath: string, aOptions: IConfigOptions): string
+  load(aPath: string, aOptions: IConfigOptions, done?: ConfigCallBackFn): Promise<any>
+  loadSync(aPath: string, aOptions: IConfigOptions): any
 }
