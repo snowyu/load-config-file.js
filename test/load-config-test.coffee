@@ -94,15 +94,15 @@ describe 'loadConfig', ->
         done()
       return
 
-    it 'should load config asynchronously with bom', (done)->
-      loadConfig __dirname+'/fixture/con', (err, result)->
-        return done(err) if err
+    it 'should load config asynchronously with bom', ()->
+      # loadConfig __dirname+'/fixture/con', (err, result)->
+      #   return done(err) if err
+      loadConfig.load __dirname+'/fixture/con'
+      .then (result)->
         should.exist result
         result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
         result.should.be.deep.equal
           test: 123
-        done()
-      return
 
   describe 'object usage', ->
     it 'should create a new Config object', ->
@@ -145,16 +145,15 @@ describe 'loadConfig', ->
         test: 123
 
 
-    it 'should load config asynchronously', (done)->
+    it 'should load config asynchronously', ()->
       result = new loadConfig __dirname+'/fixture/config'
-      result.load (err, result)->
-        return done(err) if err
+      # result.load (err, result)->
+      #   return done(err) if err
+      result.load().then (result)->
         should.exist result
         result.should.have.property '$cfgPath', __dirname+'/fixture/config.json'
         result.should.be.deep.equal
           str: 'hello'
-        done()
-      return
 
     it 'should load config.part asynchronously', (done)->
       result = new loadConfig __dirname+'/fixture/config.part'
