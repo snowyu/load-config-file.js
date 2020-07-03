@@ -6,11 +6,8 @@ isFunction      = require('util-ex/lib/is/type/function')
 defineProperty  = require('util-ex/lib/defineProperty')
 # Promise         = require('any-promise')
 any             = require('promise-sequence/lib/any')
-{callbackify}   = require('./callbackify')
-
-if !Promise::asCallback
-  Promise::asCallback = (done) ->
-    callbackify(this, done)
+{ promisify }   = require('./promisify')
+require('./polyfill-asCallback')
 
 getKeys     = Object.keys
 
@@ -61,7 +58,6 @@ class Config
     aPath ?= @path
     aOptions ?= @options
     Config.load aPath, aOptions, done
-    @
 
   loadSync: (aPath, aOptions)->
     if isObject(aPath)
@@ -165,17 +161,15 @@ class Config
       if fs.readFileSync && !fs.readFile
         fs.readFile = fs.readFileSync
       else if fs.readFile
-        if !fs.readFile.then
-          fs.readFile = ((aReadFile) ->
-            (aPath, aOptions) ->
-              new Promise (resolve, reject)->
-                aReadFile.call fs, aPath, aOptions, (err, content) ->
-                  if err then return reject(err)
-                  resolve(content)
-                  return
-          )(fs.readFile)
+        fs.readFilep = promisify fs.readFile, fs
+        # fs.readFilep = (aPath, aOptions) ->
+        #   new Promise (resolve, reject)->
+        #     fs.readFile aPath, aOptions, (err, content) ->
+        #       if err then return reject(err)
+        #       resolve(content)
+        #       return
       Config::path = path = aFileSystem.path if aFileSystem.path
-      Config::readFile = readFile = fs.readFile.bind(fs)
+      Config::readFile = readFile = fs.readFilep
       true
 
 Config.setFileSystem require('fs')
