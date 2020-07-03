@@ -1,19 +1,23 @@
-require('any-promise/register/bluebird')
+# require('any-promise/register/bluebird')
 isArray         = require('util-ex/lib/is/type/array')
 isString        = require('util-ex/lib/is/type/string')
 isObject        = require('util-ex/lib/is/type/object')
 isFunction      = require('util-ex/lib/is/type/function')
 defineProperty  = require('util-ex/lib/defineProperty')
-Promise         = require('any-promise')
+# Promise         = require('any-promise')
 any             = require('promise-sequence/lib/any')
+{callbackify}   = require('./callbackify')
 
+if !Promise::asCallback
+  Promise::asCallback = (done) ->
+    callbackify(this, done)
 
 getKeys     = Object.keys
 
 stripBom = (str) ->
   if str.charAt(0) == '\ufeff' then str.slice(1) else str
 
-module.exports = class Config
+class Config
 
   configurators: {}
   fs: fs = null
@@ -158,9 +162,23 @@ module.exports = class Config
   @setFileSystem: (aFileSystem) ->
     if aFileSystem and aFileSystem.readFile
       Config::fs = fs = aFileSystem
+      if fs.readFileSync && !fs.readFile
+        fs.readFile = fs.readFileSync
+      else if fs.readFile
+        if !fs.readFile.then
+          fs.readFile = ((aReadFile) ->
+            (aPath, aOptions) ->
+              new Promise (resolve, reject)->
+                aReadFile.call fs, aPath, aOptions, (err, content) ->
+                  if err then return reject(err)
+                  resolve(content)
+                  return
+          )(fs.readFile)
       Config::path = path = aFileSystem.path if aFileSystem.path
-      Config::readFile = readFile = Promise.promisify(fs.readFile, context:fs)
+      Config::readFile = readFile = fs.readFile.bind(fs)
       true
 
 Config.setFileSystem require('fs')
 
+module.exports = Config
+module.exports.default = Config
