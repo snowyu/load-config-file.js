@@ -6,7 +6,7 @@ isFunction      = require('util-ex/lib/is/type/function')
 defineProperty  = require('util-ex/lib/defineProperty')
 # Promise         = require('any-promise')
 any             = require('promise-sequence/lib/any')
-{ promisify }   = require('./promisify')
+promisify       = require('./promisify').promisify
 require('./polyfill-asCallback')
 
 getKeys     = Object.keys
