@@ -1,6 +1,6 @@
 export type ConfigCallBackFn = (error: Error, content: any) => void;
-export type ConfigProcessFn = (content: string, aOptions: IConfigOptions, aCfgPath: string) => string
-export type ConfigAsyncProcessFn = (content: string, aOptions: IConfigOptions, aCfgPath: string) => string|Promise<string>
+export type ConfigProcessFn = (content: string, aOptions: IConfigOptions, aCfgPath: string) => any
+export type ConfigAsyncProcessFn = (content: string, aOptions: IConfigOptions, aCfgPath: string) => any|Promise<any>
 export interface IConfigurator {
   [name: string]: ConfigAsyncProcessFn
 }
