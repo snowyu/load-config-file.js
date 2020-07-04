@@ -26,8 +26,10 @@ export default class Config {
   static register(aExts: string|string[], aProcess: ConfigAsyncProcessFn, aConfigurators?: IConfigurator)
   static setFileSystem(aFileSystem: IFileSystem)
 
-  static load(aPath: string, aOptions: IConfigOptions, done?: ConfigCallBackFn): Promise<any>
-  static loadSync(aPath: string, aOptions: IConfigOptions): any
+  static load(aPath: string, aOptions?: IConfigOptions): Promise<any>
+  static load(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn): void
+  static load(aPath: string, done: ConfigCallBackFn): void
+  static loadSync(aPath: string, aOptions?: IConfigOptions): any
 
   configurators: IConfigurator
   fs: IFileSystem
