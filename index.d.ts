@@ -9,15 +9,16 @@ export interface IConfigOptions {
   raiseError?: boolean
   exclude?: string|string[]
   configurators?: IConfigurator
+  [name: string]: any
 }
 interface IReadFileOptions {
   encoding?: BufferEncoding|null;
   flag?: string;
 }
 export interface IFileSystem {
-  readFile?: (path: string, options?: IReadFileOptions|BufferEncoding)=>Promise<string>;
-  readFile?: (path: string, options?: IReadFileOptions|BufferEncoding, done: ConfigCallBackFn)=>void;
-  readFile?: (path: string, done: ConfigCallBackFn)=>void;
+  readFile?(path: string, options?: IReadFileOptions|BufferEncoding): Promise<string>
+  readFile?(path: string, options: IReadFileOptions|BufferEncoding, done: ConfigCallBackFn): void
+  readFile?(path: string, done: ConfigCallBackFn): void
   readFileSync: (path: string, options?: IReadFileOptions|BufferEncoding)=>string;
 }
 
