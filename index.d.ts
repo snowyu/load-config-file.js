@@ -37,6 +37,8 @@ export default class Config {
   readFile: any
 
   constructor(aPath: string, aOptions: IConfigOptions);
-  load(aPath: string, aOptions: IConfigOptions, done?: ConfigCallBackFn): Promise<any>
+  load(aPath: string, done: ConfigCallBackFn): void
+  load(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn): void
+  load(aPath: string, aOptions?: IConfigOptions): Promise<any>
   loadSync(aPath: string, aOptions: IConfigOptions): any
 }
