@@ -40,6 +40,9 @@ class Config
       else
         result = Config.loadSync(aPath, aOptions)
       return result
+    if isObject aPath
+      aOptions = aPath
+      aPath = undefined
     @path = aPath
     @options = aOptions if isObject aOptions
 
