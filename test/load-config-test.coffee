@@ -56,9 +56,9 @@ describe 'loadConfig', ->
       should.not.exist result
 
     it 'should load config synchronously with Bom', ->
-      result = loadConfig(__dirname+'/fixture/con')
+      result = loadConfig(__dirname+'/fixture/conf')
       should.exist result
-      result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
+      result.should.have.property '$cfgPath', __dirname+'/fixture/conf.json'
       result.should.be.deep.equal
         test: 123
 
@@ -97,10 +97,10 @@ describe 'loadConfig', ->
     it 'should load config asynchronously with bom', ()->
       # loadConfig __dirname+'/fixture/con', (err, result)->
       #   return done(err) if err
-      loadConfig.load __dirname+'/fixture/con'
+      loadConfig.load __dirname+'/fixture/conf'
       .then (result)->
         should.exist result
-        result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
+        result.should.have.property '$cfgPath', __dirname+'/fixture/conf.json'
         result.should.be.deep.equal
           test: 123
 
@@ -143,10 +143,10 @@ describe 'loadConfig', ->
 
 
     it 'should load config synchronously with Bom', ->
-      result = new loadConfig(__dirname+'/fixture/con')
+      result = new loadConfig(__dirname+'/fixture/conf')
       result = result.loadSync(encoding:'utf8')
       should.exist result
-      result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
+      result.should.have.property '$cfgPath', __dirname+'/fixture/conf.json'
       result.should.be.deep.equal
         test: 123
 
@@ -193,11 +193,11 @@ describe 'loadConfig', ->
       return
 
     it 'should load config asynchronously with bom', (done)->
-      result = new loadConfig __dirname+'/fixture/con'
+      result = new loadConfig __dirname+'/fixture/conf'
       result.load {encoding:'utf8'}, (err, result)->
         return done(err) if err
         should.exist result
-        result.should.have.property '$cfgPath', __dirname+'/fixture/con.jon'
+        result.should.have.property '$cfgPath', __dirname+'/fixture/conf.json'
         result.should.be.deep.equal
           test: 123
         done()
