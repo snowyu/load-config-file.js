@@ -1,3 +1,3 @@
 export type CallBackFn = (error: Error, result: any) => void;
 
-export function callbackify(promise: Promise, done: CallBackFn): Promise<any>;
+export function callbackify<T = any>(promise: Promise<T>, done: CallBackFn): Promise<T>;

@@ -1,1 +1,1 @@
-export function promisify(fn: Function): (...args?: any) => Promise<any>;
+export function promisify(fn: Function): (...args: any) => Promise<any>;

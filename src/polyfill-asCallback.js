@@ -1,5 +1,5 @@
-var callbackify     = require('./callbackify').callbackify
-var isFunction      = require('util-ex/lib/is/type/function')
+import {callbackify} from './callbackify'
+import {isFunction} from 'util-ex'
 
 if (!Promise.prototype.asCallback) {
   Promise.prototype.asCallback = function(done) {

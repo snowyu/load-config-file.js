@@ -1,3 +1,5 @@
+type BufferEncoding = "utf8" | "ascii" | "utf-8" | "utf16le" | "utf-16le" | "ucs2" | "ucs-2" | "base64" | "base64url" | "latin1" | "binary" | "hex"
+
 export type ConfigCallBackFn = (error: Error, content: any) => void;
 export type ConfigProcessFn = (content: string, aOptions: IConfigOptions, aCfgPath: string) => any
 export type ConfigAsyncProcessFn = (content: string, aOptions: IConfigOptions, aCfgPath: string) => any|Promise<any>
@@ -16,10 +18,11 @@ interface IReadFileOptions {
   flag?: string;
 }
 export interface IFileSystem {
-  readFile?(path: string, options?: IReadFileOptions|BufferEncoding): Promise<string>
-  readFile?(path: string, options: IReadFileOptions|BufferEncoding, done: ConfigCallBackFn): void
-  readFile?(path: string, done: ConfigCallBackFn): void
-  readFileSync: (path: string, options?: IReadFileOptions|BufferEncoding)=>string;
+  readFile(path: string, options?: IReadFileOptions|BufferEncoding): Promise<string>
+  readFile(path: string, options: IReadFileOptions|BufferEncoding, done: ConfigCallBackFn): void
+  readFile(path: string, done: ConfigCallBackFn): void
+  readFileSync?(path: string, options?: IReadFileOptions|BufferEncoding): string;
+  readFileAsync?(path: string, options?: IReadFileOptions|BufferEncoding): Promise<string>;
 }
 
 export default class Config {
