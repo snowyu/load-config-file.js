@@ -1,5 +1,3 @@
-import {isFunction} from 'util-ex/lib/is/type/function';
-
 export const fakeFS = {
   files: {},
   result: {},
@@ -14,7 +12,7 @@ export const fakeFS = {
   },
   readFile: function(aPath, aOptions, done) {
     var text;
-    if (isFunction(aOptions)) {
+    if (typeof aOptions === 'function') {
       done = aOptions;
       aOptions = null;
     }
