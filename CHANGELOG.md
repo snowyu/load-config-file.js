@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0-alpha.1](https://github.com/snowyu/load-config-file.js/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2024-04-22)
+
 ## [2.0.0-alpha.0](https://github.com/snowyu/load-config-file.js/compare/v1.0.7...v2.0.0-alpha.0) (2024-04-22)
 
 
