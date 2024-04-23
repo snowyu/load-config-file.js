@@ -1,3 +1,4 @@
+import { any } from 'promise-sequence'
 import sinonChai from "sinon-chai";
 import sinon from "sinon";
 import chai from "chai";
@@ -57,9 +58,16 @@ describe('loadConfig', function() {
       loadConfig.bind(null, __dirname + '/fixture/err').should["throw"]('Unexpected token');
     });
     it('should raise error if raiseError is true and no config loaded', function() {
-      loadConfig.bind(null, __dirname + '/fixture/xxy', {
-        raiseError: true
-      }).should["throw"]('xxy Nothing Loaded');
+      let err
+      try {
+        loadConfig(__dirname + '/fixture/xxy', {
+          raiseError: true
+        });
+      } catch (e) {
+        err = e
+      }
+      expect(err).to.be.an('error', 'xxy Nothing Loaded');
+      expect(err).to.has.property('code', 'ENOENT');
     });
     it('should exclude itself synchronously', function() {
       var file, result;
@@ -105,12 +113,24 @@ describe('loadConfig', function() {
         done();
       });
     });
+    it('should load config asynchronously', async function() {
+      const result = await loadConfig(__dirname + '/fixture/config', {
+        raiseError: true
+      }, true);
+      should.exist(result);
+      result.should.have.property('$cfgPath', __dirname + '/fixture/config.json');
+      result.should.be.deep.equal({
+        str: 'hello'
+      });
+    });
+
     it('should raise error if raiseError is true and no config loaded', function(done) {
       loadConfig(__dirname + '/fixture/xxy', {
         raiseError: true
       }, function(err, result) {
         should.exist(err);
         err.should.have.property('message', 'xxy Nothing Loaded');
+        expect(err).to.has.property('code', 'ENOENT');
         done();
       });
     });
@@ -198,7 +218,7 @@ describe('loadConfig', function() {
     it('should load config asynchronously', function() {
       var result;
       result = new loadConfig(__dirname + '/fixture/config');
-      result.load().then(function(result) {
+      return result.load().then(function(result) {
         should.exist(result);
         result.should.have.property('$cfgPath', __dirname + '/fixture/config.json');
         result.should.be.deep.equal({
@@ -206,6 +226,15 @@ describe('loadConfig', function() {
         });
       });
     });
+    it('should load config async func', async function() {
+      const cfg = new loadConfig(__dirname + '/fixture/config');
+      const result = await cfg.load();
+      should.exist(result);
+      result.should.have.property('$cfgPath', __dirname + '/fixture/config.json');
+      result.should.be.deep.equal({
+        str: 'hello'
+      });
+  });
     it('should load config.part asynchronously', function(done) {
       var result;
       result = new loadConfig(__dirname + '/fixture/config.part');
@@ -233,6 +262,18 @@ describe('loadConfig', function() {
         done();
       });
     });
+    it('should load config asynchronously with raiseError if nothing loaded.', async function() {
+      const cfg = new loadConfig(__dirname + '/fixture/xxx', {
+        raiseError: true
+      });
+      let err
+      try {
+        await cfg.load();
+      } catch(e) {err = e}
+      should.exist(err);
+      err.should.have.property('message', 'xxx Nothing Loaded');
+    });
+
     it('should load config asynchronously overwrite path', function(done) {
       var result;
       result = new loadConfig(__dirname + '/fixture/con');
@@ -263,6 +304,17 @@ describe('loadConfig', function() {
           test: 123
         });
         done();
+      });
+    });
+    it('should try to load configs asynchronously.', async function() {
+      const result = await any(
+        ['index', 'readme', 'config'].map(n=>__dirname + '/fixture/' + n),
+        name => loadConfig.load(name)
+      )
+      should.exist(result);
+      result.should.have.property('$cfgPath', __dirname + '/fixture/config.json');
+      result.should.be.deep.equal({
+        str: 'hello'
       });
     });
   });
