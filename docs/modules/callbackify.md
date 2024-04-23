@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[callbackify.d.ts:1](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/callbackify.d.ts#L1)
+[callbackify.d.ts:1](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/callbackify.d.ts#L1)
 
 ## Functions
 
@@ -62,4 +62,4 @@
 
 #### Defined in
 
-[callbackify.d.ts:3](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/callbackify.d.ts#L3)
+[callbackify.d.ts:3](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/callbackify.d.ts#L3)

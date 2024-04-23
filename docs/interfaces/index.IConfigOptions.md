@@ -25,17 +25,17 @@
 
 #### Defined in
 
-[index.d.ts:13](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L13)
+[index.d.ts:13](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L13)
 
 ___
 
 ### encoding
 
-• `Optional` **encoding**: [`BufferEncoding`](../modules/index.md#bufferencoding)
+• `Optional` **encoding**: `BufferEncoding`
 
 #### Defined in
 
-[index.d.ts:10](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L10)
+[index.d.ts:10](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L10)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:12](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L12)
+[index.d.ts:12](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L12)
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 #### Defined in
 
-[index.d.ts:11](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L11)
+[index.d.ts:11](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L11)

@@ -6,33 +6,25 @@
 
 ### Classes
 
-- [default](../classes/index.default.md)
+- [Config](../classes/index.Config.md)
 
 ### Interfaces
 
 - [IConfigOptions](../interfaces/index.IConfigOptions.md)
 - [IConfigurator](../interfaces/index.IConfigurator.md)
 - [IFileSystem](../interfaces/index.IFileSystem.md)
-- [IReadFileOptions](../interfaces/index.IReadFileOptions.md)
 
 ### Type Aliases
 
-- [BufferEncoding](index.md#bufferencoding)
 - [ConfigAsyncProcessFn](index.md#configasyncprocessfn)
 - [ConfigCallBackFn](index.md#configcallbackfn)
 - [ConfigProcessFn](index.md#configprocessfn)
 
+### Functions
+
+- [default](index.md#default)
+
 ## Type Aliases
-
-### BufferEncoding
-
-Ƭ **BufferEncoding**: ``"utf8"`` \| ``"ascii"`` \| ``"utf-8"`` \| ``"utf16le"`` \| ``"utf-16le"`` \| ``"ucs2"`` \| ``"ucs-2"`` \| ``"base64"`` \| ``"base64url"`` \| ``"latin1"`` \| ``"binary"`` \| ``"hex"``
-
-#### Defined in
-
-[index.d.ts:1](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L1)
-
-___
 
 ### ConfigAsyncProcessFn
 
@@ -56,7 +48,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:5](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L5)
+[index.d.ts:5](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L5)
 
 ___
 
@@ -81,7 +73,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:3](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L3)
+[index.d.ts:3](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L3)
 
 ___
 
@@ -107,4 +99,111 @@ ___
 
 #### Defined in
 
-[index.d.ts:4](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L4)
+[index.d.ts:4](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L4)
+
+## Functions
+
+### default
+
+▸ **default**(`aPath`, `aOptions`, `done`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `aPath` | `string` |
+| `aOptions` | [`IConfigOptions`](../interfaces/index.IConfigOptions.md) |
+| `done` | [`ConfigCallBackFn`](index.md#configcallbackfn) |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[index.d.ts:53](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L53)
+
+▸ **default**(`aPath`, `done`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `aPath` | `string` |
+| `done` | [`ConfigCallBackFn`](index.md#configcallbackfn) |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[index.d.ts:54](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L54)
+
+▸ **default**(`aPath`): `any`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `aPath` | `string` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[index.d.ts:55](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L55)
+
+▸ **default**(`aPath`, `aOptions`): `any`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `aPath` | `string` |
+| `aOptions` | [`IConfigOptions`](../interfaces/index.IConfigOptions.md) |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[index.d.ts:56](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L56)
+
+▸ **default**(`aPath`, `aOptions`, `isAsync`): `Promise`\<`any`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `aPath` | `string` |
+| `aOptions` | [`IConfigOptions`](../interfaces/index.IConfigOptions.md) |
+| `isAsync` | ``true`` |
+
+#### Returns
+
+`Promise`\<`any`\>
+
+#### Defined in
+
+[index.d.ts:57](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L57)
+
+▸ **default**(`aPath`, `isAsync`): `Promise`\<`any`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `aPath` | `string` |
+| `isAsync` | ``true`` |
+
+#### Returns
+
+`Promise`\<`any`\>
+
+#### Defined in
+
+[index.d.ts:58](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L58)

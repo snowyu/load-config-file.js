@@ -27,4 +27,4 @@
 
 #### Defined in
 
-[callbackify.js:1](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/callbackify.js#L1)
+[callbackify.js:1](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/callbackify.js#L1)

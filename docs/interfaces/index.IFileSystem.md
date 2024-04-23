@@ -23,7 +23,7 @@
 | Name | Type |
 | :------ | :------ |
 | `path` | `string` |
-| `options?` | [`BufferEncoding`](../modules/index.md#bufferencoding) \| [`IReadFileOptions`](index.IReadFileOptions.md) |
+| `options?` | `BufferEncoding` \| `IReadFileOptions` |
 
 #### Returns
 
@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[index.d.ts:21](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L21)
+[index.d.ts:21](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L21)
 
 ▸ **readFile**(`path`, `options`, `done`): `void`
 
@@ -40,7 +40,7 @@
 | Name | Type |
 | :------ | :------ |
 | `path` | `string` |
-| `options` | [`BufferEncoding`](../modules/index.md#bufferencoding) \| [`IReadFileOptions`](index.IReadFileOptions.md) |
+| `options` | `BufferEncoding` \| `IReadFileOptions` |
 | `done` | [`ConfigCallBackFn`](../modules/index.md#configcallbackfn) |
 
 #### Returns
@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[index.d.ts:22](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L22)
+[index.d.ts:22](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L22)
 
 ▸ **readFile**(`path`, `done`): `void`
 
@@ -66,7 +66,7 @@
 
 #### Defined in
 
-[index.d.ts:23](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L23)
+[index.d.ts:23](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L23)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `path` | `string` |
-| `options?` | [`BufferEncoding`](../modules/index.md#bufferencoding) \| [`IReadFileOptions`](index.IReadFileOptions.md) |
+| `options?` | `BufferEncoding` \| `IReadFileOptions` |
 
 #### Returns
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:25](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L25)
+[index.d.ts:25](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L25)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `path` | `string` |
-| `options?` | [`BufferEncoding`](../modules/index.md#bufferencoding) \| [`IReadFileOptions`](index.IReadFileOptions.md) |
+| `options?` | `BufferEncoding` \| `IReadFileOptions` |
 
 #### Returns
 
@@ -108,4 +108,4 @@ ___
 
 #### Defined in
 
-[index.d.ts:24](https://github.com/snowyu/load-config-file.js/blob/fb8f4e7a409bb557ea8541e7cf8678f7d13947e6/src/index.d.ts#L24)
+[index.d.ts:24](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L24)
