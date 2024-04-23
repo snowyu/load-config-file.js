@@ -25,13 +25,13 @@ export interface IFileSystem {
   readFileAsync?(path: string, options?: IReadFileOptions|BufferEncoding): Promise<string>;
 }
 
-export default class Config {
+export class Config {
   static register(aExts: string|string[], aProcess: ConfigAsyncProcessFn, aConfigurators?: IConfigurator)
   static setFileSystem(aFileSystem: IFileSystem)
 
   static load(aPath: string, aOptions?: IConfigOptions): Promise<any>
-  static load(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn): void
-  static load(aPath: string, done: ConfigCallBackFn): void
+  static load(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn|true): void|Promise<any>
+  static load(aPath: string, done: ConfigCallBackFn|true): void|Promise<any>
   static loadSync(aPath: string, aOptions?: IConfigOptions): any
 
   configurators: IConfigurator
@@ -49,3 +49,12 @@ export default class Config {
   loadSync(aPath: string, aOptions?: IConfigOptions): any
   loadSync(aOptions?: IConfigOptions): any
 }
+
+declare function loadConfig(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn):void
+declare function loadConfig(aPath: string, done: ConfigCallBackFn):void
+declare function loadConfig(aPath: string): any
+declare function loadConfig(aPath: string, aOptions: IConfigOptions): any
+declare function loadConfig(aPath: string, aOptions: IConfigOptions, isAsync: true):Promise<any>
+declare function loadConfig(aPath: string, isAsync: true):Promise<any>
+
+export default loadConfig

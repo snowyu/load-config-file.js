@@ -45,7 +45,7 @@ export function Config(aPath, aOptions, done) {
       done = aOptions;
       aOptions = null;
     }
-    if (isFunction(done)) {
+    if (isFunction(done) || done === true) {
       result = Config.load(aPath, aOptions, done);
     } else {
       result = Config.loadSync(aPath, aOptions);
@@ -141,7 +141,9 @@ Config.load = function(aPath, aOptions, done) {
     });
   }).then(function(content) {
     if (raiseError && content === void 0) {
-      throw new TypeError(path.basename(aPath) + ' Nothing Loaded');
+      const err =new TypeError(path.basename(aPath) + ' Nothing Loaded');
+      err.code = 'ENOENT';
+      throw err;
     }
     return content;
   }).asCallback(done);
@@ -187,7 +189,9 @@ Config.loadSync = function(aPath, aOptions) {
     }
   }
   if (raiseError && result === undefined) {
-    throw new TypeError(path.basename(aPath) + ' Nothing Loaded');
+    const err = new TypeError(path.basename(aPath) + ' Nothing Loaded');
+    err.code = 'ENOENT';
+    throw err;
   }
   return result;
 };
