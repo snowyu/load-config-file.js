@@ -1,4 +1,4 @@
-export const fakeFS = {
+module.exports = {
   files: {},
   result: {},
   path: require('path.js/lib/path').path,
@@ -24,5 +24,3 @@ export const fakeFS = {
     return done(aOptions.error, text);
   }
 };
-
-export default fakeFS;
