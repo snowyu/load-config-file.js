@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/snowyu/load-config-file.js/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2024-05-31)
+
+
+### Bug Fixes
+
+* should work with loadConfig(aPath: string, isAsync: true):Promise<any> ([9f60989](https://github.com/snowyu/load-config-file.js/commit/9f60989c843b8a6e30f034632edb54eec623f446))
+
 ## [2.0.0-alpha.2](https://github.com/snowyu/load-config-file.js/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2024-04-23)
 
 
