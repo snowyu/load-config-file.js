@@ -41,7 +41,7 @@ function replaceExt(aPath, aExt, aRegisteredExts) {
 export function Config(aPath, aOptions, done) {
   let result;
   if (!(this instanceof Config)) {
-    if (isFunction(aOptions)) {
+    if (isFunction(aOptions) || typeof aOptions === 'boolean') {
       done = aOptions;
       aOptions = null;
     }

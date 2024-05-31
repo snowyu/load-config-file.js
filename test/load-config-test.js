@@ -113,10 +113,17 @@ describe('loadConfig', function() {
         done();
       });
     });
-    it('should load config asynchronously', async function() {
-      const result = await loadConfig(__dirname + '/fixture/config', {
+    it('should load config asynchronously by await', async function() {
+      let result = await loadConfig(__dirname + '/fixture/config', {
         raiseError: true
       }, true);
+      should.exist(result);
+      result.should.have.property('$cfgPath', __dirname + '/fixture/config.json');
+      result.should.be.deep.equal({
+        str: 'hello'
+      });
+
+      result = await loadConfig(__dirname + '/fixture/config', true);
       should.exist(result);
       result.should.have.property('$cfgPath', __dirname + '/fixture/config.json');
       result.should.be.deep.equal({
