@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[index.d.ts:5](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L5)
+[index.d.ts:5](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L5)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:3](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L3)
+[index.d.ts:3](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L3)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:4](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L4)
+[index.d.ts:4](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L4)
 
 ## Functions
 
@@ -121,7 +121,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:53](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L53)
+[index.d.ts:53](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L53)
 
 ▸ **default**(`aPath`, `done`): `void`
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:54](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L54)
+[index.d.ts:54](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L54)
 
 ▸ **default**(`aPath`): `any`
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:55](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L55)
+[index.d.ts:55](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L55)
 
 ▸ **default**(`aPath`, `aOptions`): `any`
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:56](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L56)
+[index.d.ts:56](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L56)
 
 ▸ **default**(`aPath`, `aOptions`, `isAsync`): `Promise`\<`any`\>
 
@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:57](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L57)
+[index.d.ts:57](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L57)
 
 ▸ **default**(`aPath`, `isAsync`): `Promise`\<`any`\>
 
@@ -206,4 +206,4 @@ ___
 
 #### Defined in
 
-[index.d.ts:58](https://github.com/snowyu/load-config-file.js/blob/2255bc98ee45d0259b0beede3d86b6868359518f/src/index.d.ts#L58)
+[index.d.ts:58](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L58)

@@ -19,11 +19,11 @@ Load the config file as a plain object.
 ## Usage
 
 ```js
-var loadConfig = require('load-config-file');
-var yaml  = require('js-yaml');
-var cson  = require('cson');
+import { Config as loadConfig } from 'load-config-file'
+import { parse as parseYaml } from 'yaml'
+import * as cson from 'cson';
 
-loadConfig.register(['.yaml', '.yml'], yaml.safeLoad); //first search.
+loadConfig.register(['.yaml', '.yml'], parseYaml); //first search.
 loadConfig.register('.cson', cson.parseCSONString.bind(cson)); //second search
 loadConfig.register('.json', JSON.parse); //third search.
 
@@ -35,6 +35,7 @@ loadConfig.register('.json', JSON.parse); //third search.
 //the non-enumerable "$cfgPath" property added.
 console.log(loadConfig('config'));
 
+const result = await loadConfig('config')
 //Asynchronously load config from file
 loadConfig('config', function(err, result){
   if (err) {
