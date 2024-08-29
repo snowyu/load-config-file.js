@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[index.d.ts:21](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L21)
+[index.d.ts:21](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L21)
 
 ▸ **readFile**(`path`, `options`, `done`): `void`
 
@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[index.d.ts:22](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L22)
+[index.d.ts:22](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L22)
 
 ▸ **readFile**(`path`, `done`): `void`
 
@@ -66,7 +66,7 @@
 
 #### Defined in
 
-[index.d.ts:23](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L23)
+[index.d.ts:23](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L23)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:25](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L25)
+[index.d.ts:25](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L25)
 
 ___
 
@@ -108,4 +108,4 @@ ___
 
 #### Defined in
 
-[index.d.ts:24](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L24)
+[index.d.ts:24](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L24)

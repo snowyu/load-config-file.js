@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[index.d.ts:42](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L42)
+[index.d.ts:42](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L42)
 
 • **new Config**(`aPath`, `aOptions?`): [`Config`](index.Config.md)
 
@@ -61,7 +61,7 @@
 
 #### Defined in
 
-[index.d.ts:43](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L43)
+[index.d.ts:43](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L43)
 
 ## Properties
 
@@ -71,7 +71,7 @@
 
 #### Defined in
 
-[index.d.ts:37](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L37)
+[index.d.ts:37](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L37)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:38](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L38)
+[index.d.ts:38](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L38)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:39](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L39)
+[index.d.ts:39](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L39)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:40](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L40)
+[index.d.ts:40](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L40)
 
 ## Methods
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:44](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L44)
+[index.d.ts:44](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L44)
 
 ▸ **load**(`done`): `void`
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:45](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L45)
+[index.d.ts:45](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L45)
 
 ▸ **load**(`aPath`, `aOptions`, `done`): `void`
 
@@ -156,7 +156,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:46](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L46)
+[index.d.ts:46](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L46)
 
 ▸ **load**(`aPath`, `aOptions?`): `Promise`\<`any`\>
 
@@ -173,7 +173,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:47](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L47)
+[index.d.ts:47](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L47)
 
 ▸ **load**(`aOptions?`): `Promise`\<`any`\>
 
@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:48](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L48)
+[index.d.ts:48](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L48)
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:49](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L49)
+[index.d.ts:49](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L49)
 
 ▸ **loadSync**(`aOptions?`): `any`
 
@@ -226,7 +226,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:50](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L50)
+[index.d.ts:50](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L50)
 
 ___
 
@@ -247,7 +247,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:32](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L32)
+[index.d.ts:32](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L32)
 
 ▸ **load**(`aPath`, `aOptions`, `done`): `void` \| `Promise`\<`any`\>
 
@@ -265,7 +265,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:33](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L33)
+[index.d.ts:33](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L33)
 
 ▸ **load**(`aPath`, `done`): `void` \| `Promise`\<`any`\>
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:34](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L34)
+[index.d.ts:34](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L34)
 
 ___
 
@@ -303,7 +303,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:35](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L35)
+[index.d.ts:35](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L35)
 
 ___
 
@@ -325,7 +325,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:29](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L29)
+[index.d.ts:29](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L29)
 
 ___
 
@@ -345,4 +345,4 @@ ___
 
 #### Defined in
 
-[index.d.ts:30](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/index.d.ts#L30)
+[index.d.ts:30](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L30)

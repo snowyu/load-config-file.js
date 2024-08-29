@@ -39,4 +39,4 @@
 
 #### Defined in
 
-[promisify.js:3](https://github.com/snowyu/load-config-file.js/blob/9f60989c843b8a6e30f034632edb54eec623f446/src/promisify.js#L3)
+[promisify.js:3](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/promisify.js#L3)
