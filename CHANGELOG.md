@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.1.0](https://github.com/snowyu/load-config-file.js/compare/v2.0.0...v2.1.0) (2025-08-02)
+
+
+### Features
+
+* add exists() and existsSync() ([ea2a6f3](https://github.com/snowyu/load-config-file.js/commit/ea2a6f36a03725ea0b1fce0908a4bd40fa4f15be))
+
 ## [2.0.0](https://github.com/snowyu/load-config-file.js/compare/v2.0.0-alpha.3...v2.0.0) (2024-08-29)
 
 ## [2.0.0-alpha.3](https://github.com/snowyu/load-config-file.js/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2024-05-31)
