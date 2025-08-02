@@ -22,5 +22,8 @@ module.exports = {
     text = this.files[aPath] || aOptions.text;
     this.result[aPath] = aOptions;
     return done(aOptions.error, text);
+  },
+  existsSync: function(aPath) {
+    return this.files[aPath] != null;
   }
 };

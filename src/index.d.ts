@@ -23,6 +23,7 @@ export interface IFileSystem {
   readFile(path: string, done: ConfigCallBackFn): void
   readFileSync?(path: string, options?: IReadFileOptions|BufferEncoding): string;
   readFileAsync?(path: string, options?: IReadFileOptions|BufferEncoding): Promise<string>;
+  existsSync?(path: string): boolean;
 }
 
 export class Config {
@@ -33,6 +34,10 @@ export class Config {
   static load(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn|true): void|Promise<any>
   static load(aPath: string, done: ConfigCallBackFn|true): void|Promise<any>
   static loadSync(aPath: string, aOptions?: IConfigOptions): any
+  static exists(aPath: string, aOptions?: IConfigOptions): Promise<boolean>
+  static exists(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn|true): void|Promise<boolean>
+  static exists(aPath: string, done: ConfigCallBackFn|true): void|Promise<boolean>
+  static existsSync(aPath: string, aOptions?: IConfigOptions): boolean
 
   configurators: IConfigurator
   fs: IFileSystem
@@ -48,6 +53,12 @@ export class Config {
   load(aOptions?: IConfigOptions): Promise<any>
   loadSync(aPath: string, aOptions?: IConfigOptions): any
   loadSync(aOptions?: IConfigOptions): any
+  exists(aPath: string, done: ConfigCallBackFn): void
+  exists(done: ConfigCallBackFn): void
+  exists(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn): void
+  exists(aPath: string, aOptions?: IConfigOptions): Promise<boolean>
+  exists(aOptions?: IConfigOptions): Promise<boolean>
+  existsSync(aPath: string, aOptions?: IConfigOptions): boolean
 }
 
 declare function loadConfig(aPath: string, aOptions: IConfigOptions, done: ConfigCallBackFn):void

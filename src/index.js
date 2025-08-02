@@ -62,6 +62,28 @@ export function Config(aPath, aOptions, done) {
   }
 }
 
+Config.prototype.exists = function(aPath, aOptions, done) {
+  if (isObject(aPath)) {
+    done = aOptions;
+    aOptions = aPath;
+    aPath = null;
+  } else if (isFunction(aPath)) {
+    done = aPath;
+    aPath = null;
+    aOptions = null;
+  } else if (isFunction(aOptions)) {
+    done = aOptions;
+    aOptions = null;
+  }
+  if (aPath == null) {
+    aPath = this.path;
+  }
+  if (aOptions == null) {
+    aOptions = this.options;
+  }
+  return Config.exists(aPath, aOptions, done);
+};
+
 Config.prototype.load = function(aPath, aOptions, done) {
   if (isObject(aPath)) {
     done = aOptions;
@@ -82,6 +104,20 @@ Config.prototype.load = function(aPath, aOptions, done) {
     aOptions = this.options;
   }
   return Config.load(aPath, aOptions, done);
+};
+
+Config.prototype.existsSync = function(aPath, aOptions) {
+  if (isObject(aPath)) {
+    aOptions = aPath;
+    aPath = null;
+  }
+  if (aPath == null) {
+    aPath = this.path;
+  }
+  if (aOptions == null) {
+    aOptions = this.options;
+  }
+  return Config.existsSync(aPath, aOptions);
 };
 
 Config.prototype.loadSync = function(aPath, aOptions) {
@@ -149,6 +185,45 @@ Config.load = function(aPath, aOptions, done) {
   }).asCallback(done);
 };
 
+Config.exists = function(aPath, aOptions, done) {
+  if (typeof aOptions === 'function') {
+    done = aOptions;
+    aOptions = {};
+  }
+
+  if (aOptions == null) {
+    aOptions = {};
+  }
+  if (aOptions.encoding == null) {
+    aOptions.encoding = 'utf8';
+  }
+  const vConfigurators = isObject(aOptions.configurators) ? aOptions.configurators : Config.prototype.configurators;
+  let excludes = aOptions.exclude;
+  if (isString(excludes)) {
+    excludes = [excludes];
+  } else if (!isArray(excludes)) {
+    excludes = null;
+  }
+  const vRegisteredExts = getKeys(vConfigurators);
+  let vFiles = vRegisteredExts.map(function(ext) {
+    return replaceExt(aPath, ext, vRegisteredExts);
+  });
+  if (excludes) {
+    vFiles = vFiles.filter(function(file) {
+      const result = !(indexOf.call(excludes, file) >= 0);
+      return result
+    });
+  }
+  // Executes a provided task function with a list of arguments sequentially until the result is not null
+  return any(vFiles, function(file) {
+    const result = fs.existsSync(file) || null;
+    return result;
+  }).then(function(content) {
+    if (content === null) {content = false}
+    return content;
+  }).asCallback(done);
+};
+
 Config.loadSync = function(aPath, aOptions) {
   let result;
   if (aOptions == null) {
@@ -192,6 +267,37 @@ Config.loadSync = function(aPath, aOptions) {
     const err = new TypeError(path.basename(aPath) + ' Nothing Loaded');
     err.code = 'ENOENT';
     throw err;
+  }
+  return result;
+};
+
+Config.existsSync = function(aPath, aOptions) {
+  let result;
+  if (aOptions == null) {
+    aOptions = {};
+  }
+  if (aOptions.encoding == null) {
+    aOptions.encoding = 'utf8';
+  }
+  const vConfigurators = isObject(aOptions.configurators) ? aOptions.configurators : Config.prototype.configurators;
+  let excludes = aOptions.exclude;
+  if (isString(excludes)) {
+    excludes = [excludes];
+  } else if (!isArray(excludes)) {
+    excludes = null;
+  }
+  const vRegisteredExts = getKeys(vConfigurators);
+  for (const ext in vConfigurators) {
+    const vConfigPath = replaceExt(aPath, ext, vRegisteredExts);
+    if (excludes && (indexOf.call(excludes, vConfigPath) >= 0)) {
+      continue;
+    }
+    try {
+      result = fs.existsSync(vConfigPath);
+      if (result) { break }
+    } catch (error) {
+      continue;
+    }
   }
   return result;
 };

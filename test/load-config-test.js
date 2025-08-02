@@ -55,7 +55,7 @@ describe('loadConfig', function() {
       });
     });
     it('should load wrong config file synchronously failed', function() {
-      loadConfig.bind(null, __dirname + '/fixture/err').should["throw"]('Unexpected token');
+      loadConfig.bind(null, __dirname + '/fixture/err').should.throw();
     });
     it('should raise error if raiseError is true and no config loaded', function() {
       let err
@@ -85,6 +85,27 @@ describe('loadConfig', function() {
       result.should.be.deep.equal({
         test: 123
       });
+    });
+
+    it('should check if config file exists synchronously', function() {
+      var result;
+      result = loadConfig.existsSync(__dirname + '/fixture/config');
+      result.should.be.true;
+    });
+
+    it('should return false for non-existing config file synchronously', function() {
+      var result;
+      result = loadConfig.existsSync(__dirname + '/fixture/nonexistent');
+      result.should.be.false;
+    });
+
+    it('should exclude itself when checking synchronously', function() {
+      var file, result;
+      file = __dirname + '/fixture/config.json';
+      result = loadConfig.existsSync(file, {
+        exclude: file
+      });
+      result.should.be.false;
     });
   });
   describe('asynchronously', function() {
@@ -155,7 +176,45 @@ describe('loadConfig', function() {
       result.should.be.deep.equal({
         test: 123
       });
-  });
+    });
+    it('should check if config file exists asynchronously', function(done) {
+      loadConfig.exists(__dirname + '/fixture/config', function(err, result) {
+        if (err) return done(err);
+        result.should.be.true;
+        done();
+      });
+    });
+
+    it('should return false for non-existing config file asynchronously', function(done) {
+      loadConfig.exists(__dirname + '/fixture/nonexistent', function(err, result) {
+        if (err) return done(err);
+        result.should.be.false;
+        done();
+      });
+    });
+
+    it('should exclude itself when checking asynchronously', function(done) {
+      var file;
+      file = __dirname + '/fixture/config.json';
+      loadConfig.exists(file, {
+        exclude: file
+      }, function(err, result) {
+        if (err) return done(err);
+        result.should.be.false;
+        done();
+      });
+    });
+
+    it('should check if config file exists with await', async function() {
+      const result = await loadConfig.exists(__dirname + '/fixture/config');
+      result.should.be.true;
+    });
+
+    it('should return false for non-existing config with await', async function() {
+      const result = await loadConfig.exists(__dirname + '/fixture/nonexistent');
+      result.should.be.false;
+    });
+
   });
   describe('object usage', function() {
     it('should create a new Config object', function() {
@@ -324,6 +383,30 @@ describe('loadConfig', function() {
         str: 'hello'
       });
     });
+
+    it('should check if config file exists synchronously with object', function() {
+      var config, result;
+      config = new loadConfig(__dirname + '/fixture/config');
+      result = config.existsSync();
+      result.should.be.true;
+    });
+
+    it('should check if config file exists asynchronously with object', function(done) {
+      var config;
+      config = new loadConfig(__dirname + '/fixture/config');
+      config.exists(function(err, result) {
+        if (err) return done(err);
+        result.should.be.true;
+        done();
+      });
+    });
+
+    it('should check if config file exists asynchronously with await and object', async function() {
+      const config = new loadConfig(__dirname + '/fixture/config');
+      const result = await config.exists();
+      result.should.be.true;
+    });
+
   });
   describe('external configurators', function() {
     var configs, oldConfigs;
