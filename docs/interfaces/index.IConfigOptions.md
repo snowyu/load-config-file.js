@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[index.d.ts:13](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L13)
+[index.d.ts:13](https://github.com/snowyu/load-config-file.js/blob/ea2a6f36a03725ea0b1fce0908a4bd40fa4f15be/src/index.d.ts#L13)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:10](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L10)
+[index.d.ts:10](https://github.com/snowyu/load-config-file.js/blob/ea2a6f36a03725ea0b1fce0908a4bd40fa4f15be/src/index.d.ts#L10)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[index.d.ts:12](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L12)
+[index.d.ts:12](https://github.com/snowyu/load-config-file.js/blob/ea2a6f36a03725ea0b1fce0908a4bd40fa4f15be/src/index.d.ts#L12)
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 #### Defined in
 
-[index.d.ts:11](https://github.com/snowyu/load-config-file.js/blob/8cfff8f769e2609f7da227584685c944297db0c8/src/index.d.ts#L11)
+[index.d.ts:11](https://github.com/snowyu/load-config-file.js/blob/ea2a6f36a03725ea0b1fce0908a4bd40fa4f15be/src/index.d.ts#L11)
